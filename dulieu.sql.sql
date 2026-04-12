@@ -1,0 +1,5 @@
+USE QLSV_VanAnh;
+GO
+
+DELETE FROM svtnut 
+WHERE MaSV = '6003';
