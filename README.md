@@ -23,5 +23,7 @@ Bước 12: Tạo bảng mới (SELECT INTO): Tạo bảng SaoHoa chứa các si
 
 Bước 13: Xóa dữ liệu (Delete): Chạy lệnh SQL xóa các sinh viên có cùng họ với bản thân trong bảng SaoHoa.<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8de41123-f7b0-45db-b804-fbcd2bafb124" />
 
-Bước 14: Xuất dữ liệu (Generate Scripts): Sử dụng tính năng "Generate Scripts" trong SSMS để xuất toàn bộ cấu trúc và dữ liệu ra file dulieu.sql.
-Bước 15: Kiểm tra xóa & Phục hồi: Xóa Database, kiểm tra file vật lý, sau đó chạy lại file dulieu.sql để phục hồi và kiểm chứng.
+Bước 14: Xuất dữ liệu (Generate Scripts): Sử dụng tính năng "Generate Scripts" trong SSMS để xuất toàn bộ cấu trúc và dữ liệu ra file dulieu.sql.<img width="497" height="785" alt="image" src="https://github.com/user-attachments/assets/57aaf56d-19de-400a-8d89-ae69941db099" />
+
+Bước 15: Kiểm tra xóa & Phục hồi: Xóa Database, kiểm tra file vật lý, sau đó chạy lại file dulieu.sql để phục hồi và kiểm chứng.<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5cb66cd6-6270-464f-83bb-673897d8e0e2" />
+
