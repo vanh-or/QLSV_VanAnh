@@ -1,95 +1,27 @@
-# BÁO CÁO THỰC HÀNH HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU
-**Họ và tên:** Phạm Thị Vân Anh
-**Mã sinh viên:** K235480106003
-**Cơ sở dữ liệu:** `QLSV_VanAnh`
+Bước 1: Tải và cài đặt SQL Server 2025 (phiên bản Developer), chọn tất cả các tính năng mở rộng.
+Bước 2: Cấu hình bảo mật: Thiết lập "Mixed Mode" (Windows Authentication và SQL Server Authentication - sa/123).<img width="975" height="1073" alt="image" src="https://github.com/user-attachments/assets/acfecbe1-f29a-4632-a08b-74a8ac97350d" />
 
----
+Bước 3: Cấu hình kết nối: Thiết lập TCP/IP, chọn cổng động (Dynamic Port) theo MSSV (3xxxx, 4xxxx, hoặc 5xxxx).<img width="966" height="1181" alt="image" src="https://github.com/user-attachments/assets/5a007cdf-6a74-4758-b516-61e7bbedc0b7" />
 
-## HƯỚNG DẪN LÀM BÀI VÀ KẾT QUẢ THỰC HIỆN
+Bước 4: Kiểm tra trạng thái: Sử dụng lệnh netstat -ano trên CMD để xác nhận dịch vụ SQL Server đang chạy và mở đúng cổng đã đặt.<img width="975" height="554" alt="image" src="https://github.com/user-attachments/assets/0f49b2d8-1464-4681-b2d3-bfd2f342b816" />
 
-#### 1. Tạo cơ sở dữ liệu
-Sử dụng giao diện đồ họa (SSMS) để tạo một Database mới có tên là `QLSV_VanAnh`.
-`[CHÈN ẢNH BƯỚC 1]`
+Bước 5: Cài đặt SQL Server Management Studio (SSMS) để quản trị cơ sở dữ liệu.<img width="975" height="506" alt="image" src="https://github.com/user-attachments/assets/aa651862-ec1d-4443-9554-17661b47ee3f" />
 
-#### 2. Tạo bảng dữ liệu
-Tạo bảng `svtnut` trong Database vừa tạo.
-`[CHÈN ẢNH BƯỚC 2]`
+Bước 6: Tạo Database: Tạo CSDL mới tại ổ đĩa khác ổ C, xác nhận sự tồn tại của file dữ liệu (.mdf) và file log (.ldf).<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f8ae1531-6aae-4fd8-b1aa-0a7e55105843" />
 
-#### 3. Thêm cột dữ liệu
-Thêm các cột tương ứng để lưu trữ thông tin sinh viên.
-`[CHÈN ẢNH BƯỚC 3]`
+Bước 7: Thiết kế Table: Tạo bảng dữ liệu mới, đặt khóa chính (masv) và các trường phù hợp với file CSV mẫu.<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/09eba67a-4d5e-42f5-9e42-47630bf08b2a" />
 
-#### 4. Sửa kiểu dữ liệu
-Điều chỉnh kiểu dữ liệu của các trường cho phù hợp (Ví dụ: `nvarchar` cho các trường văn bản).
-`[CHÈN ẢNH BƯỚC 4]`
+Bước 8: Nhập dữ liệu: Sử dụng tính năng Import của SSMS để đưa dữ liệu từ file CSV vào bảng.<img width="975" height="518" alt="image" src="https://github.com/user-attachments/assets/dae0b82c-8830-4651-b40c-9378178f854c" />
 
-#### 5. Thiết lập Khóa chính
-Cài đặt trường `masv` làm khóa chính (Primary Key) cho bảng `svtnut`.
-`[CHÈN ẢNH BƯỚC 5]`
+Bước 9: Kiểm tra dữ liệu: Dùng lệnh SELECT COUNT(*) để xác nhận đã import thành công khoảng 12020 dòng.<img width="612" height="427" alt="image" src="https://github.com/user-attachments/assets/74d711e4-d959-4ee1-a1e6-557e3a19126f" />
 
-#### 6. Xác định vị trí lưu trữ vật lý
-Kiểm tra và xác định đường dẫn lưu trữ hai tệp vật lý `.mdf` và `.ldf` của Database.
-`[CHÈN ẢNH BƯỚC 6]`
+Bước 10: Thêm dữ liệu (Insert): Chạy lệnh SQL thêm một hàng dữ liệu chứa thông tin cá nhân của bản thân.<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3aeb57b5-015a-4203-9114-5553812ab902" />
 
-#### 7. Script tạo bảng
-Sử dụng chức năng sinh mã của SSMS để tạo ra đoạn Code SQL thiết lập bảng `svtnut` với khóa chính.
-`[CHÈN ẢNH BƯỚC 7]`
+Bước 11: Cập nhật dữ liệu (Update): Chạy lệnh SQL chuyển noisinh thành 'Sao Hoả' cho các bản ghi có noisinh và diachi là NULL.<img width="975" height="524" alt="image" src="https://github.com/user-attachments/assets/682aa863-e8ca-4e59-b3ac-a8e610509362" />
 
-#### 8. Import dữ liệu từ file CSV
-Sử dụng tính năng Import Flat File để nạp dữ liệu mẫu vào bảng. Đã thực hiện mapping lại các cột (`NULL` -> `noisinh`, `NULL2` -> `diachi`, `sdt` -> `malop`) để khớp với cấu trúc.
-`[CHÈN ẢNH BƯỚC 8]`
+Bước 12: Tạo bảng mới (SELECT INTO): Tạo bảng SaoHoa chứa các sinh viên có nơi sinh là 'Sao Hoả'.<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/836c5695-99a9-4e5f-8ed7-316236d7b324" />
 
-#### 9. Kiểm tra tổng số dòng dữ liệu
-Sử dụng lệnh T-SQL để đếm tổng số bản ghi sau khi import, đảm bảo nạp đủ 12.020 dòng.
-* **Lệnh thực hiện:**
-  ```sql
-  SELECT COUNT(*) AS TongSoSinhVien FROM svtnut;
-  10. Chèn thông tin cá nhân (Insert)
-Thực hiện thêm mới (insert) 1 bản ghi vào bảng với thông tin cá nhân của người làm bài báo cáo.
+Bước 13: Xóa dữ liệu (Delete): Chạy lệnh SQL xóa các sinh viên có cùng họ với bản thân trong bảng SaoHoa.<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8de41123-f7b0-45db-b804-fbcd2bafb124" />
 
-Lệnh thực hiện:
-
-SQL
-INSERT INTO svtnut (masv, hotensv, ngaysinh) VALUES ('K235480106003', N'Phạm Thị Vân Anh', '15/08/2005');
-[CHÈN ẢNH BƯỚC 10]
-
-11. Cập nhật dữ liệu khuyết thiếu (Update)
-Cập nhật trường noisinh thành "Sao Hoả" cho những bản ghi bị khuyết thiếu cả thông tin nơi sinh và địa chỉ.
-
-Lệnh thực hiện:
-
-SQL
-UPDATE svtnut SET noisinh = N'Sao Hỏa' WHERE noisinh IS NULL AND diachi IS NULL;
-[CHÈN ẢNH BƯỚC 11]
-
-12. Phân tách dữ liệu sang bảng phụ (Select Into)
-Tạo bảng mới tên là SaoHoa chứa danh sách các sinh viên có nơi sinh ở "Sao Hoả".
-
-Lệnh thực hiện:
-
-SQL
-SELECT * INTO SaoHoa FROM svtnut WHERE noisinh = N'Sao Hỏa';
-[CHÈN ẢNH BƯỚC 12]
-
-13. Lọc và xóa sinh viên cùng họ (Delete)
-Thực hiện xóa (delete) khỏi bảng SaoHoa những sinh viên có cùng họ "Phạm" với người làm bài.
-
-Lệnh thực hiện:
-
-SQL
-DELETE FROM SaoHoa WHERE hotensv LIKE N'Phạm %';
-[CHÈN ẢNH BƯỚC 13]
-
-14. Xuất Script sao lưu toàn diện (Schema and Data)
-Sử dụng tính năng Generate Scripts xuất toàn bộ cấu trúc CSDL và dữ liệu ra tệp dulieu.sql.
-
-Cấu hình: Advanced -> Types of data to script: Schema and data.
-[CHÈN ẢNH BƯỚC 14]
-
-15. Mô phỏng mất dữ liệu và kiểm tra file vật lý
-Xoá CSDL QLSV_VanAnh trên giao diện SSMS. Sau đó, truy cập vào thư mục vật lý để kiểm tra trạng thái tồn tại của 2 file .mdf và .ldf.
-[CHÈN ẢNH BƯỚC 15: Ảnh chụp thư mục hiển thị file vật lý]
-
-16. Hồi sinh hệ thống từ tệp Script dự phòng
-Mở file dulieu.sql (tạo ở Bước 14) và Execute toàn bộ lệnh để khôi phục lại CSDL cùng các bảng dữ liệu bên trong.
-[CHÈN ẢNH BƯỚC 16: Ảnh chụp Object Explorer sau khi khôi phục]
+Bước 14: Xuất dữ liệu (Generate Scripts): Sử dụng tính năng "Generate Scripts" trong SSMS để xuất toàn bộ cấu trúc và dữ liệu ra file dulieu.sql.
+Bước 15: Kiểm tra xóa & Phục hồi: Xóa Database, kiểm tra file vật lý, sau đó chạy lại file dulieu.sql để phục hồi và kiểm chứng.
