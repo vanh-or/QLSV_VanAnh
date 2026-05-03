@@ -1,47 +1,77 @@
 Họ Tên: Phạm Thị Vân Anh
+
 MSSV: K235480106003
+
 Lớp: K59KMT.K01
+
 Nội dung: Bài tập 02
+
 Phần 1: Thiết kế và Khởi tạo Cấu trúc Dữ liệu
 
 -- 1. Tạo Database mới theo đúng tên dự án và MSSV
+
+
 CREATE DATABASE [QuanLyKhachSan_k235480106003];
+
 GO
 
 -- Chuyển sang sử dụng Database vừa tạo
+
 USE [QuanLyKhachSan_k235480106003];
+
 GO
 
+
 -- 2. Tạo bảng [LoaiPhong] (Bảng chứa thông tin các loại phòng như VIP, Thường...)
+
 CREATE TABLE [LoaiPhong] (
+
     [MaLoaiPhong] INT PRIMARY KEY IDENTITY(1,1), -- PK: Khóa chính, tự tăng
+    
     [TenLoaiPhong] NVARCHAR(100) NOT NULL,        -- Chuỗi Unicode
+    
     [DonGiaTheoNgay] MONEY NOT NULL,              -- Kiểu tiền tệ
     
     -- CK: Đơn giá phải lớn hơn 0
+    
     CONSTRAINT [CK_DonGia_Duong] CHECK ([DonGiaTheoNgay] > 0)
 );
 GO
 
 -- 3. Tạo bảng [Phong] (Thông tin chi tiết từng phòng)
+
 CREATE TABLE [Phong] (
+
     [MaPhong] INT PRIMARY KEY IDENTITY(1,1),      -- PK: Khóa chính
+    
     [SoPhong] VARCHAR(10) NOT NULL,                -- Số phòng (ví dụ: P101)
+    
     [TrangThai] NVARCHAR(50) DEFAULT N'Trống',    -- Trạng thái phòng
+    
     [MaLoaiPhong] INT,                            -- Khóa ngoại
 
     -- FK: Nối tới bảng LoaiPhong
+    
     CONSTRAINT [FK_Phong_LoaiPhong] FOREIGN KEY ([MaLoaiPhong]) 
+    
     REFERENCES [LoaiPhong]([MaLoaiPhong])
+    
 );
+
 GO
 
 -- 4. Tạo bảng [KhachHang] (Thông tin khách thuê)
+
 CREATE TABLE [KhachHang] (
+
     [MaKhachHang] INT PRIMARY KEY IDENTITY(1,1),  -- PK
+    
     [HoTenKhach] NVARCHAR(200) NOT NULL,          -- Quy tắc BướuLạcĐà
+    
     [SoDienThoai] VARCHAR(15),                    -- Chuỗi ký tự
+    
     [NgaySinh] DATE,                              -- Kiểu ngày tháng
+    
     [DiemTichLuy] FLOAT DEFAULT 0,                -- Số thực
 
     -- CK: Điểm tích lũy không được âm
